@@ -25,7 +25,7 @@ export class CandidateRegistrationComponent implements OnInit {
   StatesList = NigeriaStates
   courseList = utmeSubjectCode
   programmeList = utmeProgrammes.sort()
-  statusMessage :string[] = []
+  statusMessage: string[] = []
   showPassword: boolean = false;
   envTest = environment.sideNavOpen;
   constructor(
@@ -50,8 +50,7 @@ export class CandidateRegistrationComponent implements OnInit {
 
   checkCutoffMet(cutoffvalue: number): boolean {
     let answer = false;
-    // @ts-ignore
-    if (this.selectedStudent.utme_aggregate >= cutoffvalue) {answer = true;}
+    if (this.selectedStudent.utme_aggregate && this.selectedStudent.utme_aggregate >= cutoffvalue) {answer = true;}
     return answer;
   }
 
@@ -61,8 +60,7 @@ export class CandidateRegistrationComponent implements OnInit {
   }
 
   getStudentInformation(): void {
-    // @ts-ignore
-    const AselectedStudent = (this.applicationService.getStudentRecord(this.selectedStudent.reg_num, this.candidateType))
+    const AselectedStudent = (this.applicationService.getStudentRecord(this.selectedStudent.reg_num as string, this.candidateType))
     AselectedStudent.subscribe(data => {
       this.statusMessage = [];
       // console.log({data})
@@ -72,7 +70,7 @@ export class CandidateRegistrationComponent implements OnInit {
       // console.log('[0]', data[0])
       // console.log('std record',data[0].studentRecord[0])
 
-        // @ts-ignore
+
         this.statusMessage.push("Examination data found!")
         // save temp student Information
         const tempStudentInfo = data[0].studentRecord[0]
@@ -93,10 +91,11 @@ export class CandidateRegistrationComponent implements OnInit {
       console.log({isRegistered})
       if (isRegistered) {}
       else {
-        // @ts-ignore
-        const comboInfo = this.applicationService.suggestDepartment([this.selectedStudent.subject_1, this.selectedStudent.subject_2, this.selectedStudent.subject_3, this.selectedStudent.department, this.selectedStudent.utme_aggregate.toString()])
-// @ts-ignore
-        const cutOffInfo = (this.applicationService.getCutoffInfo(this.selectedStudent.department))
+        const comboInfo = this.applicationService.suggestDepartment([this.selectedStudent.subject_1 as string,
+          this.selectedStudent.subject_2 as string, this.selectedStudent.subject_3 as string, this.selectedStudent.department as string,
+          (this.selectedStudent.utme_aggregate as number).toString()])
+
+        const cutOffInfo = (this.applicationService.getCutoffInfo(this.selectedStudent.department as string))
         cutOffInfo.subscribe(cutoffdata => {
           console.log("cutoffData:::", cutoffdata)
           console.log("status:::", cutoffdata[0].status)
@@ -120,7 +119,7 @@ export class CandidateRegistrationComponent implements OnInit {
                 if (suggestData.combostatus === 202) {
                   if (suggestData.suggest.length > 0) {
                     this.statusMessage.push("Here are a few suggested courses you could do with UNIZIK");
-                    suggestData.suggest.forEach((e: string) => {
+                    suggestData.suggest.forEach((e : string) => {
                     this.statusMessage.push( `\n ${e} `)
 
                   })
@@ -171,9 +170,9 @@ export class CandidateRegistrationComponent implements OnInit {
   }
 
   suggestDepartment(): void {
-        // @ts-ignore
-
-    this.applicationService.suggestDepartment([this.selectedStudent.subject_1, this.selectedStudent.subject_2, this.selectedStudent.subject_3, this.selectedStudent.department, this.selectedStudent.utme_aggregate.toString()]).subscribe((suggestData) => {
+    this.applicationService.suggestDepartment([this.selectedStudent.subject_1 as string,
+      this.selectedStudent.subject_2 as string, this.selectedStudent.subject_3 as string, this.selectedStudent.department as string,
+      (this.selectedStudent.utme_aggregate as number).toString()]).subscribe((suggestData) => {
         if (suggestData.combostatus === 202) {
           if (suggestData.suggest.length > 0) {
             this.statusMessage.push("Here are a few suggested courses you can do with UNIZIK");
