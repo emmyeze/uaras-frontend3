@@ -1,0 +1,13 @@
+<app-header (toggleStatus)= "sideBarToggler()"   flexLayout="column"></app-header>
+
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]= "sideNavOpen">
+    <app-sidebar fxFlex></app-sidebar>
+
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<app-footer flexLayout="column"></app-footer>
