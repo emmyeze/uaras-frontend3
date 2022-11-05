@@ -1,0 +1,34 @@
+<mat-toolbar>JUPEB Candidates Upload</mat-toolbar>
+<div>
+  <mat-card>  <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+
+    <h3>Upload</h3>
+
+    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <p>Choose File (.xlx or .xlsx)</p>
+
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile" name="myfile" accept=".xlsx"
+            (change)="onFileSelect($event)" #UploadFileInput multiple="false">
+        <!-- <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label> -->
+    </div>
+
+    <mat-progress-spinner
+              class="example-margin"
+
+              [mode]= "mode"
+              [value]= "spinnerValue">
+    </mat-progress-spinner>
+
+
+      <button mat-stroked-button color="primary" type="submit" > <mat-icon>upload</mat-icon>Upload</button>
+    </div>
+  </form>
+  </mat-card>
+<br>
+  <mat-card>
+    <h3>Upload Dashboard</h3>
+  </mat-card>
+
+</div>
+
