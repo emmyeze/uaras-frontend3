@@ -12,6 +12,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { MaterialModule } from './material/material.module';
+
 import { UtmeComponent } from './topview/utme/utme.component';
 import { DeComponent } from './topview/de/de.component';
 import { PrescienceComponent } from './topview/prescience/prescience.component';
@@ -23,6 +24,10 @@ import { CandidateAdmissionComponent } from './topview/candidate-admission/candi
 import { SettingsComponent } from './topview/settings/settings.component';
 import { DashboardComponent } from './topview/dashboard/dashboard.component';
 import { HomeComponent } from './topview/home/home.component';
+// import { PassmarkPipe } from './shared/pipes/passmark.pipe';
+// import { PassmarkPipe } from './pipes/passmark.pipe';
+// import { SettingMainComponent } from './shared/components/others/setting-main/setting-main.component';
+// import { SettingsPassmarkComponent } from 'src/app/shared/tables/settings-passmark/settings-passmark.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +43,8 @@ import { HomeComponent } from './topview/home/home.component';
     SettingsComponent,
     DashboardComponent,
     HomeComponent,
-
+    // PassmarkPipe,
+    // SettingsPassmarkComponent
 
   ],
   imports: [
@@ -47,6 +53,7 @@ import { HomeComponent } from './topview/home/home.component';
     // FullwidthModule,
     BrowserAnimationsModule,
     MatGridListModule,
+    // FlexLayoutModule,
     // MatTabsModule,
     // MatIconModule,
     // MatButtonModule,

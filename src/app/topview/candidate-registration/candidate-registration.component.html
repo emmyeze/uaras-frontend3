@@ -1,0 +1,218 @@
+<p>{{envTest ? 'it is open' : 'it is closed'}}</p>
+<mat-card>
+  <!-- <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px"> -->
+    <div fxLayout="column" class="dialogspacing" fxFlex>
+      <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" fxFlex>
+        <mat-form-field fxFlex appearance="fill">
+              <input matInput  type="text" placeholder="JAMB NO"
+                [(ngModel)]= "selectedStudent.reg_num" name="jambNo">
+                <button matSuffix mat-button mat-icon-button>
+
+                  <mat-icon *ngIf =  "checkLoadedApplication()" (click)="clearFilter()">close</mat-icon>
+                  <mat-icon *ngIf = "!checkLoadedApplication()" >search</mat-icon>
+                </button>
+
+
+                <mat-hint>e.g. JAMBNO 124567CF</mat-hint>
+                <mat-error>Insert JAMB NO!</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="20" appearance="fill">
+              <mat-select [(ngModel)]= "candidateType"
+
+              required
+              name = "candidateType" >
+                  <mat-option *ngFor="let stat of candidateTypeList" [value]= "stat">
+                      {{stat}}
+                      </mat-option>
+                  </mat-select>
+                  <mat-hint>e.g. UTME or DE</mat-hint>
+                  <mat-error>Candidate type required!</mat-error>
+        </mat-form-field>
+
+        <button mat-stroked-button color="primary" (click)= "getStudentInformation()">
+          <mat-icon>search</mat-icon>search</button>
+
+        <mat-form-field fxFlex>
+
+          <input matInput class="displayName" disabled  type="text" placeholder="DEPARTMENT"
+                [(ngModel)]= "selectedStudent.department" name="department">
+
+        </mat-form-field>
+    </div>
+    <div>
+      <br>
+      <p>bio-data</p>
+
+      <div *ngIf="challengePassed" class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field fxFlex appearance="outline">
+          <input matInput  type="text" placeholder="PHONENO"
+            [(ngModel)]= "selectedStudent.phone" name="phone"/>
+        </mat-form-field>
+        <mat-form-field fxFlex appearance="outline">
+          <input matInput  type="text" placeholder="EMAIL"
+            [(ngModel)]= "selectedStudent.email" name="email"/>
+        </mat-form-field>
+        <mat-form-field fxFlex appearance="outline">
+          <input matInput  [type]="showPassword ? 'text' : 'password'" placeholder="PASSWORD"
+            [(ngModel)]= "selectedStudent.password" name="password"/>
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword?'visibility_off':'visibility'}}</mat-icon>
+        </mat-form-field>
+      </div>
+
+
+        <div class="input-row " fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+          <mat-form-field fxFlex>
+            <input class="displayName" disabled matInput  type="text" placeholder="FULLNAME"
+              [(ngModel)]= "selectedStudent.fullname" name="fullname"/>
+          </mat-form-field>
+
+        </div>
+        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+          <mat-form-field fxFlex = "20">
+            <input class="displayName" disabled matInput  type="text" placeholder="GENDER"
+              [(ngModel)]= "selectedStudent.sex" name="gender">
+
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input class="displayName" disabled matInput  type="text" placeholder="STATE"
+              [(ngModel)]= "selectedStudent.state" name="state"/>
+
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input class="displayName" disabled matInput  type="text" placeholder="LGA"
+              [(ngModel)]= "selectedStudent.lga" name="lga"/>
+          </mat-form-field>
+
+        </div>
+    </div>
+
+<div class="score-background">
+  <p>exam scores</p>
+
+  <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+    <br>
+    <div fxLayout="column" fxFlex="15">
+
+      <p class="for-english" fxFlex>
+        {{selectedStudent.subject_1 | uppercase}}
+      </p>
+      <p *ngIf = "!searchDone" class="for-english" fxFlex></p>
+      <br>
+      <mat-form-field fxFlex appearance="outline">
+        <input class="scoreInput" disabled matInput  type="number"
+          [(ngModel)]= "selectedStudent.subject_1_score" name="subject_1_score"/>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxFlex="15">
+      <p class="for-english" fxFlex>
+        {{selectedStudent.subject_2 | uppercase}}
+      </p>
+      <p *ngIf = "!searchDone" class="for-english" fxFlex></p>
+      <br>
+
+
+      <!-- placeholder="SUBJECT2" -->
+      <!-- <mat-form-field fxFlex>
+        <input matInput  type="text"
+          [ngModel]= "selectedStudent.subject_2 | uppercase" name="subject_2"/> -->
+
+       <!-- <mat-label>SUBJECT2</mat-label>
+          <mat-select [(ngModel)]="selectedStudent.subject_2"
+
+          required
+          name = "subject2" >
+              <mat-option *ngFor="let stat of courseList" [value]= "stat">
+                  {{stat}}
+                  </mat-option>
+              </mat-select>
+              <mat-error>Subject2 Required!</mat-error> -->
+        <!-- </mat-form-field> -->
+        <!-- placeholder="SUB2SCORE" -->
+      <mat-form-field fxFlex appearance="outline">
+        <input class="scoreInput" disabled matInput  type="number"
+          [(ngModel)]= "selectedStudent.subject_2_score" name="subject_2_score"/>
+      </mat-form-field>
+
+    </div>
+    <div fxLayout="column" fxFlex="15" >
+
+      <p  class="for-english" fxFlex>
+        {{selectedStudent.subject_3 | uppercase}}
+      </p>
+      <p *ngIf = "!searchDone" class="for-english" fxFlex></p>
+      <br>
+
+        <mat-form-field fxFlex appearance="outline">
+          <input class="scoreInput" disabled matInput  type="number"
+            [(ngModel)]= "selectedStudent.subject_3_score " name="subject_3_score"/>
+        </mat-form-field>
+
+
+    </div>
+    <div fxLayout="column" class="for-english-group" fxFlex="15">
+      <p *ngIf = "searchDone" class="for-english" fxFlex>
+        ENGLISH
+      </p>
+
+      <p *ngIf = "!searchDone" class="for-english" fxFlex></p>
+      <br>
+      <!-- placeholder="ENGLISHSCORE" -->
+      <mat-form-field fxFlex appearance="outline">
+        <input class="scoreInput" disabled matInput  type="number"
+          [(ngModel)]= "selectedStudent.english_score" name="english_score"/>
+      </mat-form-field>
+
+    </div>
+    <div fxLayout="column" fxFlex>
+      <div fxFlex="50">
+        <p class="for-english center-item" fxFlex>utme total aggregate</p>
+      </div>
+
+      <p class="for-english utmefont center-item" fxFlex >
+        {{calculateUTMEAgg()}}
+      </p>
+
+    </div>
+
+
+
+
+  </div>
+
+</div>
+
+        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+          <button fxFlex [disabled]="!challengePassed"  (click)= "registerStudent()" mat-raised-button type="submit" color="primary">REGISTER</button>
+      <button fxFlex mat-raised-button class="typicalbutton">CANCEL</button>
+
+        </div>
+
+
+
+
+
+
+    </div>
+    <!-- <div fxFlex = "40"> -->
+    <div fxFlex="45" class="mat-elevation-z8 status-panel"  >
+      <div class="input-row" fxLayout="row" fxLayoutAlign="center center"  fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <h3 center-item >STATUS</h3>
+      </div>
+
+      <!-- <p>{{statusMessage}}</p> -->
+      <div class="input-row"  fxLayout="row" fxLayoutAlign="center center"  fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-chip-list class="mat-chip-list-stacked" center-item >
+          <mat-chip *ngFor="let chip of statusMessage"  >
+            {{chip}}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+
+    </div>
+
+  <!-- </div> -->
+
+  <!-- <form #guestForm35="ngForm"> -->
+
+<!-- </form> -->
+</mat-card>

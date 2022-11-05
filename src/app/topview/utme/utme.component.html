@@ -1,0 +1,116 @@
+<mat-toolbar>UTME Candidates Upload</mat-toolbar>
+<div>
+  <mat-card>  <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+
+    <h3>Upload</h3>
+
+    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <p>Choose File (.xlx or .xlsx)</p>
+
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile" name="myfile" accept=".xlsx,.xls"
+            (change)="onFileSelect($event)" #UploadFileInput multiple="false">
+        <!-- <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label> -->
+    </div>
+
+    <mat-progress-spinner
+              class="example-margin"
+
+              [mode]= "mode"
+              [value]= "spinnerValue">
+    </mat-progress-spinner>
+
+
+      <button mat-stroked-button color="primary" type="submit" > <mat-icon>upload</mat-icon>Upload</button>
+    </div>
+  </form>
+  </mat-card>
+<br>
+  <mat-card>
+    <h2>Upload Dashboard</h2>
+    <div>
+
+      <!-- <mat-grid-list cols="2" rowHeight="40px"> -->
+        <h3><span>Upload status- {{selectedStatusMessage.status}}</span><span class="time-display">time taken- {{selectedStatusMessage.time_taken}}</span></h3>
+
+      <!-- </mat-grid-list> -->
+
+
+    <mat-grid-list cols="2" rowHeight="80px">
+      <mat-grid-tile>
+        <!-- <section class="example-section"> -->
+        <mat-progress-bar
+            class="example-margin"
+            [color]="color"
+            [mode]="totalmode"
+            [value]="totalvalue"
+            >
+        </mat-progress-bar>
+      <!-- </section> -->
+    </mat-grid-tile>
+      <mat-grid-tile>
+        {{totalvalue| number: '1.0-0'}}% Complete</mat-grid-tile>
+
+    </mat-grid-list>
+
+    </div>
+    <div>
+      <h3 class="example-h2">Processing details</h3>
+      <mat-grid-list cols="5" rowHeight="80px">
+        <mat-grid-tile [colspan]="1">
+          <!-- <section class="example-section"> -->
+          <mat-progress-bar
+              class="example-margin"
+              [color]="color"
+              [mode]="tempmode"
+            [value]="tempvalue">
+          </mat-progress-bar>
+        <!-- </section> -->
+      </mat-grid-tile >
+
+        <mat-grid-tile [colspan]="1">{{tempvalue| number: '1.0-0'}}% Temp table upload</mat-grid-tile>
+        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+          <!-- <section class="example-section"> -->
+          <mat-progress-bar
+              class="example-margin"
+              [color]="color"
+              [mode]="mainmode"
+            [value]="mainvalue">
+          </mat-progress-bar>
+        <!-- </section> -->
+      </mat-grid-tile >
+
+        <mat-grid-tile [colspan]="1">{{mainvalue| number: '1.0-0'}}% Processed</mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1"> <p class="for-status">{{selectedStatusMessage.total_rowdata_uploaded_to_api}}</p></mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> Total Records from Excel</mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+
+        <p class="for-status">{{selectedStatusMessage.new_rowdata_in_main}}</p>
+      </mat-grid-tile >
+
+        <mat-grid-tile [colspan]="1"> added to Main table</mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1"> <p class="for-status errors-highlight">{{selectedStatusMessage.rowdata_error}}</p></mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> Total Errors</mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> <p class="for-status">{{selectedStatusMessage.rowdata_info_updated}}</p></mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> Updated on Main table</mat-grid-tile>
+
+
+
+
+      </mat-grid-list>
+
+
+    </div>
+
+
+
+  </mat-card>
+
+</div>
+

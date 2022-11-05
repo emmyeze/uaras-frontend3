@@ -1,0 +1,99 @@
+.for-english {
+  padding-top:22px;
+
+}
+
+.for-english-group {
+  padding-left: 30px;
+}
+
+.utmefont {
+  font-size:30px
+
+}
+.score-background {
+  padding: 20px;
+  margin-top:20px;
+  margin-bottom:20px;
+  background-color:#F0F0F0;
+}
+
+.score-color {
+  background-color:#F0F0F0;
+
+}
+
+.dialogspacing {
+  padding: 20px;
+}
+
+input {
+  font-size: 15px;
+}
+
+.displayName:disabled {
+  background: white;
+  color: black;
+}
+
+.money-font {
+  font-size: 20px;
+}
+
+.scoreInput:disabled {
+
+  color: black;
+}
+
+.center-item {text-align:center;}
+
+input[class~="bg-transparente"] {
+  background-color: transparent;
+}
+
+mat-chip {
+  min-width: 250px;
+  max-height: 60px;
+}
+
+.status-panel {
+  max-height: 620px;
+  overflow: auto;
+}
+
+// .status-info {
+//   overflow: auto;
+//   max-height:inherit;
+// }
+
+.mat-card.scrollable-content {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  > .mat-card-title-group {
+    display: block;
+  }
+
+  > .mat-card-content {
+    overflow-y: auto;
+  }
+}
+
+
+
+.mat-chip-list-wrapper mat-chip {
+  display: block;
+  float: left;
+  clear: left;
+}
+
+.mat-chip-list-wrapper .mat-chip-input {
+  width: 100%;
+}
+
+/** Just for align close icon/button */
+.mat-chip-list-wrapper mat-chip .mat-chip-remove {
+  vertical-align: bottom;
+}
+
